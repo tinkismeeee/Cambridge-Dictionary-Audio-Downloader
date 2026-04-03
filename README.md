@@ -26,9 +26,18 @@
 
 ---
 
-## 🚀 Installation
+## 📸 Screenshots
 
-> ⚠️ This extension is not available on the Chrome Web Store. Please install it manually.
+<p align="center">
+  <img src="assets/Screenshot-1.png" alt="Cambridge Page" width="700">
+</p>
+<p align="center">
+  <img src="assets/Screenshot-2.png" alt="Cambridge Page" width="700">
+</p>
+
+---
+
+## 🚀 Installation
 
 ### 🔹 Option 1: Using Git (For advanced user)
 
@@ -109,6 +118,15 @@ Created by [@Tinkismee](https://github.com/tinkismeeee)
 - ⬇️ Tải xuống chỉ với 1 click
 
 ---
+
+## 📸 Ảnh demo
+
+<p align="center">
+  <img src="assets/Screenshot-1.png" alt="Cambridge Page" width="700">
+</p>
+<p align="center">
+  <img src="assets/Screenshot-2.png" alt="Cambridge Page" width="700">
+</p>
 
 ## 🚀 Cài đặt
 
