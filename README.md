@@ -1,4 +1,4 @@
-# Cambridge Audio Downloader
+# Cambridge Dictionary Audio Downloader
 
 ![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-green)
 ![Status](https://img.shields.io/badge/status-active-success)
@@ -59,7 +59,7 @@ chrome://extensions/
 
 3. Click **Load unpacked**
 
-4. Select the project folder
+4. Select the extension folder
 
 5. Enjoy! 🎉
 
@@ -143,7 +143,7 @@ chrome://extensions/
 
 3. Nhấn **Load unpacked (Tải tiện ích chưa đóng gói)**
 
-4. Chọn thư mục project
+4. Chọn thư mục chứa extension vừa giải nén
 
 5. Thưởng thức extension thôi 😚
 
