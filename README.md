@@ -1,24 +1,74 @@
 # Cambridge Audio Downloader
 
-## 🇺🇸 English
+![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-green)
+![Status](https://img.shields.io/badge/status-active-success)
+![License](https://img.shields.io/badge/license-educational-blue)
 
-**Cambridge Audio Downloader** is a Chrome Extension that helps users quickly extract and download MP3 audio files from Cambridge Dictionary pages.
-
----
-
-### ✨ Features
-
-1. 🔍 Automatically scans the current Cambridge Dictionary page
-2. 🎵 Extracts all available MP3 audio files
-3. ▶️ Built-in audio player for preview
-4. ⬇️ One-click download for each audio file
+> A lightweight Chrome Extension to extract and download MP3 audio from Cambridge Dictionary pages.
 
 ---
 
-### 🚀 How to Use
+## 📑 Table of Contents
+
+- [✨ Features](#-features)
+- [🚀 Installation](#-installation)
+- [🧠 How to Use](#-how-to-use)
+- [📌 Notes](#-notes)
+
+---
+
+## ✨ Features
+
+- 🔍 Automatically scans Cambridge Dictionary pages
+- 🎵 Extracts all available MP3 audio files
+- ▶️ Built-in audio preview player
+- ⬇️ One-click download
+
+---
+
+## 🚀 Installation
+
+> ⚠️ This extension is not available on the Chrome Web Store. Please install it manually.
+
+### 🔹 Option 1: Using Git (For advanced user)
+
+```bash
+git clone https://github.com/tinkismeeee/Cambridge-Dictionary-Audio-Downloader.git
+cd Cambridge-Dictionary-Audio-Downloader
+```
+
+### 🔹 Option 2: Download ZIP (For normal user)
+
+1. Click **Code** → **Download ZIP**
+2. Extract the ZIP file
+
+Or download directly:
+https://github.com/tinkismeeee/Cambridge-Dictionary-Audio-Downloader/archive/refs/heads/main.zip
+
+---
+
+### 🔧 Load Extension in Chrome
+
+1. Open Chrome and go to:
+
+```
+chrome://extensions/
+```
+
+2. Enable **Developer mode** (top right)
+
+3. Click **Load unpacked**
+
+4. Select the project folder
+
+5. Enjoy! 🎉
+
+---
+
+## 🧠 How to Use
 
 1. Open a word page on Cambridge Dictionary
-    - https://dictionary.cambridge.org
+   https://dictionary.cambridge.org
 
 2. Click the extension icon
 
@@ -26,60 +76,97 @@
     - Scan the page
     - Display available audio files
 
-4. Click:
-    - ▶️ to play
+4. Use:
+    - ▶️ to preview
     - ⬇️ to download
 
 ---
 
-### 📌 Notes
+## 📌 Notes
 
-- For educational purposes only
+- For **educational purposes only**
+- Do not use downloaded audio for commercial or unauthorized purposes
 
 ---
 
-### 👤 Author
+## 👤 Author
 
 Created by [@Tinkismee](https://github.com/tinkismeeee)
 
 ---
 
-## 🇻🇳 Tiếng Việt
+# 🇻🇳 Tiếng Việt
 
-**Cambridge Audio Downloader** là một Chrome Extension giúp người dùng nhanh chóng lấy và tải xuống các file audio MP3 từ trang Cambridge Dictionary.
-
----
-
-### ✨ Tính năng
-
-1. 🔍 Tự động quét trang Cambridge Dictionary hiện tại
-2. 🎵 Lấy tất cả file audio MP3 có trên trang
-3. ▶️ Có trình phát audio ngay trong popup
-4. ⬇️ Tải xuống chỉ với 1 click
+> Extension Chrome giúp lấy và tải file MP3 từ Cambridge Dictionary nhanh chóng.
 
 ---
 
-### 🚀 Cách sử dụng
+## ✨ Tính năng
 
-1. Mở một từ trên Cambridge Dictionary
-    - https://dictionary.cambridge.org
+- 🔍 Tự động quét trang Cambridge Dictionary
+- 🎵 Lấy tất cả file MP3 trên trang
+- ▶️ Nghe trực tiếp trong extension
+- ⬇️ Tải xuống chỉ với 1 click
 
-2. Click vào icon extension
+---
 
-3. Extension sẽ:
-    - Quét trang
-    - Hiển thị danh sách audio
+## 🚀 Cài đặt
 
+<!-- > ⚠️ Extension không có trên Chrome Web Store, cần cài thủ công. -->
+
+### 🔹 Cách 1: Sử dụng Git (Dành cho người dùng nâng cao)
+
+```bash
+git clone https://github.com/tinkismeeee/Cambridge-Dictionary-Audio-Downloader.git
+cd Cambridge-Dictionary-Audio-Downloader
+```
+
+### 🔹 Cách 2: Tải file ZIP (Dành cho người dùng thủ công)
+
+1. Nhấn **Code** → **Download ZIP**
+2. Giải nén file ZIP
+
+Hoặc tải trực tiếp:
+https://github.com/tinkismeeee/Cambridge-Dictionary-Audio-Downloader/archive/refs/heads/main.zip
+
+---
+
+### 🔧 Load Extension vào Chrome
+
+1. Mở:
+
+```
+chrome://extensions/
+```
+
+2. Bật **Developer mode**
+
+3. Nhấn **Load unpacked (Tải tiện ích chưa đóng gói)**
+
+4. Chọn thư mục project
+
+5. Thưởng thức extension thôi 😚
+
+---
+
+## 🧠 Cách sử dụng
+
+1. Mở từ bất kỳ trên Cambridge Dictionary
+2. Click icon extension
+3. Extension sẽ quét và hiển thị audio
 4. Click:
     - ▶️ để nghe
     - ⬇️ để tải
 
 ---
 
-### 👤 Tác giả
+## 📌 Ghi chú
 
-Được làm bởi [@Tinkismee](https://github.com/tinkismeeee)
+- **Chỉ dùng cho mục đích học tập**
+- Không sử dụng audio cho mục đích thương mại
 
-### 📌 Ghi chú
+---
 
-**_Chỉ sử dụng extension cho mục đích giáo dục. Nghiêm cấm sử dụng audio cho mục đích khác._**
+## 👤 Tác giả
+
+Phát triển bởi [@Tinkismee](https://github.com/tinkismeeee)
