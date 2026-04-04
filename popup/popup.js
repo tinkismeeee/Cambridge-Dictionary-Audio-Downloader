@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 		audioListEl.innerHTML = audios
 			.map((audio, index) => {
-				const title = audio.title || `Audio ${index + 1}`;
+				const title = `Audio ${index + 1}`;
 				const url = audio.url;
 				const fileName = getFileNameFromUrl(url, index);
 

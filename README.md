@@ -114,7 +114,7 @@ Created by [@Tinkismee](https://github.com/tinkismeeee)
 
 - 🔍 Tự động quét trang Cambridge Dictionary
 - 🎵 Lấy tất cả file MP3 trên trang
-- ▶️ Nghe trực tiếp trong extension
+- ▶️ Nghe trực tiếp trong trình duyệt
 - ⬇️ Tải xuống chỉ với 1 click
 
 ---
