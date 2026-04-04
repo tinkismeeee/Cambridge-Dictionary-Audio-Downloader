@@ -3,7 +3,7 @@
 	"name": "Cambridge Audio Downloader",
 	"version": "1.0",
 	"description": "Extension to download audio files from Cambridge Dictionary",
-	"permissions": ["storage", "activeTab", "scripting"],
+	"permissions": ["activeTab", "scripting"],
 	"action": {
 		"default_popup": "popup/popup.html",
 		"default_icon": {
