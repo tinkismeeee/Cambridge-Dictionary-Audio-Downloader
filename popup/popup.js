@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 		audioListEl.innerHTML = audios
 			.map((audio, index) => {
-				const title = `Audio ${index + 1}`;
+				const title = audio.title || `Audio ${index + 1}`;
 				const url = audio.url;
 				const fileName = getFileNameFromUrl(url, index);
 
@@ -59,8 +59,13 @@ document.addEventListener("DOMContentLoaded", async () => {
           <div class="audio-item">
             <div class="audio-title">${escapeHtml(title)}</div>
             <div class="audio-url">${escapeHtml(url)}</div>
-            <audio class="audio-player" controls src="${escapeHtml(url)}"></audio>
             <div class="actions">
+              <button
+                class="btn btn-secondary play-on-page"
+                data-url="${escapeHtml(url)}"
+              >
+                Play
+              </button>
               <a
                 class="btn btn-primary"
                 href="${escapeHtml(url)}"
@@ -83,6 +88,83 @@ document.addEventListener("DOMContentLoaded", async () => {
         `;
 			})
 			.join("");
+
+		bindPlayOnPageEvents();
+	}
+
+	async function playAudioOnCurrentPage(url) {
+		const [tab] = await chrome.tabs.query({
+			active: true,
+			currentWindow: true,
+		});
+
+		if (!tab?.id) {
+			throw new Error("Could not get current tab.");
+		}
+
+		await chrome.scripting.executeScript({
+			target: { tabId: tab.id },
+			args: [url],
+			func: (audioUrl) => {
+				try {
+					const existingAudio = document.getElementById(
+						"cambridge-audio-downloader-player",
+					);
+
+					if (existingAudio) {
+						existingAudio.pause();
+						existingAudio.remove();
+					}
+
+					const audio = document.createElement("audio");
+					audio.id = "cambridge-audio-downloader-player";
+					audio.src = audioUrl;
+					audio.autoplay = true;
+					audio.controls = false;
+					audio.style.display = "none";
+
+					document.body.appendChild(audio);
+
+					audio.play().catch((error) => {
+						console.error("Playback failed:", error);
+					});
+
+					audio.addEventListener("ended", () => {
+						audio.remove();
+					});
+				} catch (error) {
+					console.error("Cannot play audio on page:", error);
+				}
+			},
+		});
+	}
+
+	function bindPlayOnPageEvents() {
+		const buttons = document.querySelectorAll(".play-on-page");
+
+		buttons.forEach((button) => {
+			button.addEventListener("click", async () => {
+				const url = button.dataset.url;
+				if (!url) return;
+
+				const originalText = button.textContent;
+
+				try {
+					button.disabled = true;
+					button.textContent = "Playing...";
+					await playAudioOnCurrentPage(url);
+					// setStatus("Audio is playing on the current page.");
+				} catch (error) {
+					console.error(error);
+					// setStatus("Failed to play audio on the page.");
+				} finally {
+					setTimeout(() => {
+						button.disabled = false;
+						button.textContent = originalText;
+					}, 1200);
+				}
+			});
+		});
 	}
 
 	try {
@@ -131,7 +213,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 					});
 				}
 
-				// 1) <source type="audio/mpeg" src="...">
 				document
 					.querySelectorAll('source[type="audio/mpeg"]')
 					.forEach((el) => {
@@ -147,7 +228,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 						if (src) pushAudio(src, title);
 					});
 
-				// 2) <audio src="...">
 				document.querySelectorAll("audio[src]").forEach((el) => {
 					const src = el.getAttribute("src");
 					const title =
@@ -158,7 +238,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 					if (src) pushAudio(src, title);
 				});
 
-				// 3) <a href="...mp3">
 				document.querySelectorAll('a[href*=".mp3"]').forEach((el) => {
 					const href = el.getAttribute("href");
 					const title =
@@ -168,7 +247,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 					if (href) pushAudio(href, title);
 				});
 
-				// 4) dedupe
 				const uniqueMap = new Map();
 
 				collected.forEach((item, index) => {
