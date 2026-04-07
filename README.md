@@ -43,6 +43,10 @@
   <img src="assets/Screenshot-2.png" alt="Cambridge Page" width="700">
 </p>
 
+<p align="center">
+  <a href="https://youtu.be/nTObR1F9JtE">Demo.mp4</a>
+</p>
+
 ---
 
 ## 🚀 Installation
