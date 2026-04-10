@@ -35,10 +35,34 @@ document.addEventListener("DOMContentLoaded", async () => {
 		return `audio-${index + 1}.mp3`;
 	}
 
+	function getQrCodeUrl(url) {
+		const encodedAudioUrl = encodeURIComponent(url);
+		return `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodedAudioUrl}`;
+	}
+
 	function detectAccentFromUrl(url) {
 		if (/\/uk_pron\//i.test(url)) return "UK";
 		if (/\/us_pron\//i.test(url)) return "US";
 		return "Unknown";
+	}
+
+	function canScriptTabUrl(tabUrl) {
+		if (!tabUrl) return false;
+
+		const blockedPrefixes = ["chrome://", "chrome-extension://", "edge://", "about:", "view-source:"];
+
+		if (blockedPrefixes.some((prefix) => tabUrl.startsWith(prefix))) {
+			return false;
+		}
+
+		const blockedHosts = ["chromewebstore.google.com", "chrome.google.com", "microsoftedge.microsoft.com"];
+
+		try {
+			const { hostname } = new URL(tabUrl);
+			return !blockedHosts.includes(hostname);
+		} catch {
+			return false;
+		}
 	}
 
 	function renderEmptyState() {
@@ -60,6 +84,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 				const accent = detectAccentFromUrl(audio.url);
 				const title = `Audio ${index + 1}`;
 				const url = audio.url;
+				const qrCodeUrl = getQrCodeUrl(url);
 				const fileName = getFileNameFromUrl(url, index);
 				const accentClass = `accent-${accent.toLowerCase()}`;
 
@@ -94,6 +119,14 @@ document.addEventListener("DOMContentLoaded", async () => {
               >
                 Open Link
               </a>
+				<a
+								class="btn btn-secondary"
+								href="${escapeHtml(qrCodeUrl)}"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								QR Code
+							</a>
             </div>
           </div>
         `;
@@ -111,6 +144,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 		if (!tab?.id) {
 			throw new Error("Could not get current tab.");
+		}
+
+		if (!canScriptTabUrl(tab.url)) {
+			throw new Error("This page blocks extension scripting.");
 		}
 
 		await chrome.scripting.executeScript({
@@ -186,6 +223,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 		if (!tab?.id) {
 			throw new Error("Could not get current tab.");
+		}
+
+		if (!canScriptTabUrl(tab.url)) {
+			setStatus("Cannot access this page.");
+			audioListEl.innerHTML = `
+      <div class="empty">
+        This tab is blocked by browser policy.<br>
+      </div>
+    `;
+			return;
 		}
 
 		setStatus("Scanning audio on the page...");
@@ -265,7 +312,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 		renderAudioList(audios);
 		setStatus(`Found ${audios.length} MP3 audio files.`);
 	} catch (error) {
-		console.error(error);
 		setStatus("An error occurred while scanning for audio.");
 		audioListEl.innerHTML = `
       <div class="empty">

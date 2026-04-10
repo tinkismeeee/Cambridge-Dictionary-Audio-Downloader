@@ -143,17 +143,17 @@ body {
 	cursor: not-allowed;
 }
 .actions {
-	display: flex;
-	gap: 8px;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 6px;
 }
 
 .btn {
 	appearance: none;
 	border: none;
 	border-radius: 10px;
-	padding: 9px 12px;
-	font-size: 13px;
+	padding: 7px 8px;
+	font-size: 12px;
 	font-weight: 600;
 	text-decoration: none;
 	cursor: pointer;
@@ -163,7 +163,8 @@ body {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	min-width: 96px;
+	min-width: 0;
+	white-space: nowrap;
 }
 
 .btn:hover {
