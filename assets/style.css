@@ -79,8 +79,43 @@ body {
 	font-size: 14px;
 	font-weight: 700;
 	line-height: 1.5;
-	margin-bottom: 8px;
 	word-break: break-word;
+}
+
+.audio-title-wrap {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	margin-bottom: 8px;
+}
+
+.accent-badge {
+	font-size: 11px;
+	font-weight: 700;
+	padding: 3px 8px;
+	border-radius: 999px;
+	border: 1px solid transparent;
+	white-space: nowrap;
+	line-height: 1.4;
+}
+
+.accent-uk {
+	background: #eff6ff;
+	color: #1d4ed8;
+	border-color: #bfdbfe;
+}
+
+.accent-us {
+	background: #ecfeff;
+	color: #0f766e;
+	border-color: #99f6e4;
+}
+
+.accent-unknown {
+	background: #f3f4f6;
+	color: #374151;
+	border-color: #d1d5db;
 }
 
 .audio-url {

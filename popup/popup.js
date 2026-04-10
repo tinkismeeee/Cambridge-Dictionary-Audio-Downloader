@@ -35,6 +35,12 @@ document.addEventListener("DOMContentLoaded", async () => {
 		return `audio-${index + 1}.mp3`;
 	}
 
+	function detectAccentFromUrl(url) {
+		if (/\/uk_pron\//i.test(url)) return "UK";
+		if (/\/us_pron\//i.test(url)) return "US";
+		return "Unknown";
+	}
+
 	function renderEmptyState() {
 		audioListEl.innerHTML = `
       <div class="empty">
@@ -51,13 +57,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 		audioListEl.innerHTML = audios
 			.map((audio, index) => {
+				const accent = detectAccentFromUrl(audio.url);
 				const title = `Audio ${index + 1}`;
 				const url = audio.url;
 				const fileName = getFileNameFromUrl(url, index);
+				const accentClass = `accent-${accent.toLowerCase()}`;
 
 				return `
           <div class="audio-item">
-            <div class="audio-title">${escapeHtml(title)}</div>
+            <div class="audio-title-wrap">
+              <div class="audio-title">${escapeHtml(title)}</div>
+              <span class="accent-badge ${escapeHtml(accentClass)}">${escapeHtml(accent)}</span>
+            </div>
             <div class="audio-url">${escapeHtml(url)}</div>
             <div class="actions">
               <button
@@ -107,9 +118,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 			args: [url],
 			func: (audioUrl) => {
 				try {
-					const existingAudio = document.getElementById(
-						"cambridge-audio-downloader-player",
-					);
+					const existingAudio = document.getElementById("cambridge-audio-downloader-player");
 
 					if (existingAudio) {
 						existingAudio.pause();
@@ -201,11 +210,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 				function pushAudio(url, title = "") {
 					const fullUrl = absoluteUrl(url);
 					if (!fullUrl) return;
-					if (
-						!/\.mp3(\?|#|$)/i.test(fullUrl) &&
-						!fullUrl.includes(".mp3")
-					)
-						return;
+					if (!/\.mp3(\?|#|$)/i.test(fullUrl) && !fullUrl.includes(".mp3")) return;
 
 					collected.push({
 						url: fullUrl,
@@ -213,20 +218,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 					});
 				}
 
-				document
-					.querySelectorAll('source[type="audio/mpeg"]')
-					.forEach((el) => {
-						const src = el.getAttribute("src");
-						const parentAudio = el.closest("audio");
-						const title =
-							parentAudio?.getAttribute("aria-label") ||
-							parentAudio?.getAttribute("title") ||
-							parentAudio
-								?.closest("[data-type]")
-								?.getAttribute("data-type") ||
-							"";
-						if (src) pushAudio(src, title);
-					});
+				document.querySelectorAll('source[type="audio/mpeg"]').forEach((el) => {
+					const src = el.getAttribute("src");
+					const parentAudio = el.closest("audio");
+					const title =
+						parentAudio?.getAttribute("aria-label") ||
+						parentAudio?.getAttribute("title") ||
+						parentAudio?.closest("[data-type]")?.getAttribute("data-type") ||
+						"";
+					if (src) pushAudio(src, title);
+				});
 
 				document.querySelectorAll("audio[src]").forEach((el) => {
 					const src = el.getAttribute("src");
@@ -240,10 +241,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 				document.querySelectorAll('a[href*=".mp3"]').forEach((el) => {
 					const href = el.getAttribute("href");
-					const title =
-						cleanText(el.textContent) ||
-						el.getAttribute("title") ||
-						"";
+					const title = cleanText(el.textContent) || el.getAttribute("title") || "";
 					if (href) pushAudio(href, title);
 				});
 
